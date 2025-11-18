@@ -155,6 +155,26 @@ if (contactCard) {
   });
 }
 
+// Contact form mailto handler
+const contactForm = document.querySelector(".contact-card form");
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm);
+    const name = (formData.get("name") || "Anonymous").toString().trim();
+    const email = (formData.get("email") || "No email provided").toString().trim();
+    const message = (formData.get("message") || "").toString().trim();
+
+    const subject = encodeURIComponent(`New message from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email || "No email provided"}\n\n${message}`
+    );
+
+    const mailtoLink = `mailto:gigihhaidarfalah14@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+  });
+}
+
 // Cursor glow tracker
 const glow = document.querySelector(".cursor-glow");
 if (glow) {
